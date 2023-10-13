@@ -2,9 +2,49 @@
 <html lang="en">
 ---
 title = data inventory of buildings
-desc: data of buildings
+desc: bar plots and scatter plots
+layout: vegalite_example
 ---
 
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "hconcat": [
+      {
+        "mark": "bar",
+        "encoding": {
+          "x": {"field": "IMDB Rating", "type": "quantitative", "bin": true, "title": "IMDB Rating"},
+          "y": {"aggregate": "count", "type": "quantitative", "title": "Count"},
+          "color": {"aggregate": "sum", "field": "Production Budget", "type": "quantitative", "scale": {"type": "log"}, "title": "Log Scale of Production Budget"}
+        },
+        "title": "Building Inventory Count by IMDB Rating and Production Budget"
+      },
+      {
+        "mark": "point",
+        "encoding": {
+          "x": {"field": "IMDB Rating", "type": "quantitative", "title": "IMDB Rating"},
+          "y": {"field": "Production Budget", "type": "quantitative", "title": "Production Budget"},
+          "color": {"value": "steelblue"}
+        },
+        "title": "IMDB Ratings vs Production Budget"
+      },
+      {
+        "mark": "boxplot",
+        "encoding": {
+          "x": {"field": "IMDB Rating", "type": "ordinal", "title": "IMDB Rating"},
+          "y": {"field": "Production Budget", "type": "quantitative", "title": "Production Budget"},
+          "color": {"field": "IMDB Rating", "type": "ordinal", "title": "IMDB Rating"}
+        },
+        "title": "Distribution of Production Budgets by IMDB Rating"
+      }
+    ],
+    "resolve": {"scale": {"color": "independent"}},
+    "data": {"url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"}
+  }
+
+  
+
+
+<!-- 
     <head>
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
 
@@ -68,7 +108,16 @@ desc: data of buildings
     </script>
 
 </body>
-<html>
+<html> -->
+
+
+
+
+
+
+
+
+
 <!-- 
 <head>
     <meta charset="UTF-8">
