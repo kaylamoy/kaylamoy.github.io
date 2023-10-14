@@ -2,7 +2,7 @@
 <html lang="en">
 ---
 title = data inventory of buildings
-desc: bar plots and scatter plots
+desc: bar plot, point plot, and boxplot
 layout: vegalite_example
 ---
 
@@ -12,181 +12,32 @@ layout: vegalite_example
       {
         "mark": "bar",
         "encoding": {
-          "x": {"field": "IMDB Rating", "type": "quantitative", "bin": true, "title": "IMDB Rating"},
-          "y": {"aggregate": "count", "type": "quantitative", "title": "Count"},
-          "color": {"aggregate": "sum", "field": "Production Budget", "type": "quantitative", "scale": {"type": "log"}, "title": "Log Scale of Production Budget"}
+          "x": {"field": "Year Acquired", "type": "ordinal", "title": "Year Acquired"},
+          "y": {"aggregate": "count", "type": "quantitative", "title": "Building Count"},
+          "color": {"aggregate": "sum", "field": "Square Footage", "type": "quantitative", "scale": {"type": "log"}, "title": "Total Square Footage (Log Scale)"}
         },
-        "title": "Building Inventory Count by IMDB Rating and Production Budget"
+        "title": "Building Count and Total Square Footage by Year Acquired"
       },
       {
         "mark": "point",
         "encoding": {
-          "x": {"field": "IMDB Rating", "type": "quantitative", "title": "IMDB Rating"},
-          "y": {"field": "Production Budget", "type": "quantitative", "title": "Production Budget"},
+          "x": {"field": "Year Acquired", "type": "ordinal", "title": "Year Acquired"},
+          "y": {"field": "Square Footage", "type": "quantitative", "title": "Total Square Footage"},
           "color": {"value": "steelblue"}
         },
-        "title": "IMDB Ratings vs Production Budget"
+        "title": "Total Square Footage by Year Acquired"
       },
       {
         "mark": "boxplot",
         "encoding": {
-          "x": {"field": "IMDB Rating", "type": "ordinal", "title": "IMDB Rating"},
-          "y": {"field": "Production Budget", "type": "quantitative", "title": "Production Budget"},
-          "color": {"field": "IMDB Rating", "type": "ordinal", "title": "IMDB Rating"}
+          "x": {"field": "Bldg Status", "type": "nominal", "title": "Building Status"},
+          "y": {"field": "Square Footage", "type": "quantitative", "title": "Square Footage"},
+          "color": {"field": "Bldg Status", "type": "nominal", "title": "Building Status"}
         },
-        "title": "Distribution of Production Budgets by IMDB Rating"
+        "title": "Distribution of Square Footage by Building Status"
       }
     ],
     "resolve": {"scale": {"color": "independent"}},
     "data": {"url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"}
   }
-
   
-
-
-<!-- 
-    <head>
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
-
-        <title>Building Inventory Dataset Visualizations</title>
-        <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-    </head>
-
-<body>
-    <div id = 'visualization'></div>
-
-    <script>
-        fetch('https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv')
-        .then(response => reponse.text())
-        .then(data => {
-            const parsedData = new Blob([data], {type: 'text/csv'});
-            const url = URL.createObjectURL(parsedData);
-
-        //bar chart
-        const barChart = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "data" : {"url": url, "format":{"type": "csv"}},
-            "mark": "bar", 
-            "encoding": {
-                "x": {"field": "Year Constructed", "type":"ordinal", "axis":{"title": "Year Constructed"}},
-                "y" = {"aggregate":"count", "type":"quantitative", "axis":{"title": "Count"}}
-            }
-        };
-
-        //scatter Plot
-        const scatterViz = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "data" : {"url": url, "format":{"type": "csv"}},
-            "mark":"point",
-            "encoding" : {
-                "x" : {"field": "Year Constructed", "type": "quantitative", "axis": {"title": "Year Constructed"}},
-                "y" : {"field":"Square Footage", "type": "quantitative", "axis": {"title" : "Square Footage"}}
-            }
-        };
-        //stacked bar chart
-        const barChartViz = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "data": {"url":url, "format" : {"type": "csv"}},
-            "mark" : "bar",
-            "encoding" : {
-                "x" : {"field" : "Year Constructed", "type": "ordinal", "axis": {"title": "Year Constructed"}},
-                "y" : {"aggregate": "sum","field": "Square Footage", "type":"quantitative", "axis":{"title":"Total Square Footage"}},
-                "color":{"field":"Building Type", "type":"normal", "legend": {"title": "Building Type"}}
-            }
-        };
-
-        //concat
-        const combinedViz = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "hconcat": [barChart, scatterViz, barChartViz]
-        };
-
-        vegaEmbed('visualization', combinedViz);
-        });
-    </script>
-
-</body>
-<html> -->
-
-
-
-
-
-
-
-
-
-<!-- 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building Inventory Visualizations</title>
-    <script> <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0/build/vega.min.js" 
-    integrity="sha256-na2uPt+tUPV7GRVpc+/ezQj+lGwljIvOJifkmg8f3as=" crossorigin="anonymous"></script>
-
-    <script> <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2/build/vega-embed.min.js" 
-    integrity="sha256-GfFZ6w7V/y3Ws9eHVsOXZ/F1ZFroThVZraOAx3HAt6s=" crossorigin="anonymous"></script>
-
-    <script> src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0/build/vega-lite.min.js" 
-        integrity="sha256-WLAn82Ut4GptY/IJf4K/1i+R8ibAkVLFhBVkOovqCK8=" crossorigin="anonymous"></script>
-</head>
-
-    <body>
-    <div id="visualization1"></div>
-    <div id="visualization2"></div>
-    <div id="visualization3"></div>
-
-   
-    <script>
-        fetch('https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv')
-            .then(response => response.text())
-            .then(data => {
-                const parsedData = new Blob([data], { type: 'text/csv' });
-                const url = URL.createObjectURL(parsedData);
-
-                // Visualization 1: Bar Chart
-                const visualization1Spec = {
-                    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                    "data": {"url": url, "format": {"type": "csv"}},
-                    "mark": "bar",
-                    "encoding": {
-                        "x": {"field": "Year Constructed", "type": "ordinal", "axis": {"title": "Year Constructed"}},
-                        "y": {"aggregate": "count", "type": "quantitative", "axis": {"title": "Count"}}
-                    }
-                };
-                vegaEmbed('#visualization1', visualization1Spec);
-
-                // Visualization 2: Scatter Plot
-                const visualization2Spec = {
-                    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                    "data": {"url": url, "format": {"type": "csv"}},
-                    "mark": "point",
-                    "encoding": {
-                        "x": {"field": "Year Constructed", "type": "quantitative", "axis": {"title": "Year Constructed"}},
-                        "y": {"field": "Square Footage", "type": "quantitative", "axis": {"title": "Square Footage"}}
-                    }
-                };
-                vegaEmbed('#visualization2', visualization2Spec);
-
-                // Visualization 3: Stacked Bar Chart
-                const visualization3Spec = {
-                    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                    "data": {"url": url, "format": {"type": "csv"}},
-                    "mark": "bar",
-                    "encoding": {
-                        "x": {"field": "Year Constructed", "type": "ordinal", "axis": {"title": "Year Constructed"}},
-                        "y": {"aggregate": "sum", "field": "Square Footage", "type": "quantitative", "axis": {"title": "Total Square Footage"}},
-                        "color": {"field": "Building Type", "type": "nominal", "legend": {"title": "Building Type"}}
-                    }
-                };
-                vegaEmbed('#visualization3', visualization3Spec);
-            });
-    </script>
-</body>
-
-</html>
-
-
- -->
