@@ -5,6 +5,7 @@ title = data inventory of buildings
 desc: visualizations of data 
 ---
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -58,11 +59,10 @@ desc: visualizations of data
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
                 "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "point",
+                "mark": "bar",
                 "encoding": {
-                    "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                    "y": { "aggregate": "average", "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Average Square Feet" } },
-                    "color": { "value": "steelblue" }
+                    "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
+                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
                 }
             }
         ];
@@ -75,6 +75,7 @@ desc: visualizations of data
 </body>
 
 </html>
+
 
 
 
