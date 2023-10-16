@@ -5,7 +5,6 @@ title = data inventory of buildings
 desc: visualizations of data 
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,43 +20,62 @@ desc: visualizations of data
 </head>
 
 <body>
-    <div>
-        <h2>Building Types Count</h2>
-        <div id="viz1"></div>
-    </div>
-
-    <div>
-        <h2>Building Size vs. Year Constructed</h2>
-        <div id="viz2"></div>
-    </div>
-
-    <div>
-        <h2>Building Types Count by Year</h2>
-        <div id="viz3"></div>
-    </div>
-
-    <div>
-        <h2>Average Square Feet by Year (Scatter Plot)</h2>
-        <div id="viz4"></div>
-    </div>
+    <div id="viz1"></div>
+    <div id="viz2"></div>
+    <div id="viz3"></div>
+    <div id="viz4"></div>
 
     <script>
-        var vlSpec4Scatter = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-            "mark": "point",
-            "encoding": {
-                "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                "y": { "aggregate": "average", "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Average Square Feet" } },
-                "color": { "value": "steelblue" }
+        var vlSpecs = [
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "bar",
+                "encoding": {
+                    "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
+                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
+                }
+            },
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "point",
+                "encoding": {
+                    "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                    "y": { "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Gross Square Feet" } }
+                }
+            },
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "bar",
+                "encoding": {
+                    "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } },
+                    "color": { "field": "BUILDING TYPE", "type": "nominal", "legend": { "title": "Building Type" } }
+                }
+            },
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "point",
+                "encoding": {
+                    "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                    "y": { "aggregate": "average", "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Average Square Feet" } },
+                    "color": { "value": "steelblue" }
+                }
             }
-        };
+        ];
 
-        vegaEmbed("#viz4", vlSpec4Scatter);
+        vegaEmbed("#viz1", vlSpecs[0]);
+        vegaEmbed("#viz2", vlSpecs[1]);
+        vegaEmbed("#viz3", vlSpecs[2]);
+        vegaEmbed("#viz4", vlSpecs[3]);
     </script>
 </body>
 
 </html>
+
 
 
 
