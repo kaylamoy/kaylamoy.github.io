@@ -24,13 +24,14 @@ desc: visualizations of data
     <div id="viz1"></div>
     <div id="viz2"></div>
     <div id="viz3"></div>
-    <div id="viz4"></div>
 
     <script>
         var vlSpecs = [
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "data": {
+                    "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+                },
                 "mark": "bar",
                 "encoding": {
                     "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
@@ -39,30 +40,25 @@ desc: visualizations of data
             },
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "point",
+                "data": {
+                    "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+                },
+                "mark": "bar",
                 "encoding": {
                     "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                    "y": { "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Gross Square Feet" } }
+                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
                 }
             },
             {
                 "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "data": {
+                    "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+                },
                 "mark": "bar",
                 "encoding": {
                     "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
                     "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } },
                     "color": { "field": "BUILDING TYPE", "type": "nominal", "legend": { "title": "Building Type" } }
-                }
-            },
-            {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "bar",
-                "encoding": {
-                    "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
-                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
                 }
             }
         ];
@@ -70,7 +66,6 @@ desc: visualizations of data
         vegaEmbed("#viz1", vlSpecs[0]);
         vegaEmbed("#viz2", vlSpecs[1]);
         vegaEmbed("#viz3", vlSpecs[2]);
-        vegaEmbed("#viz4", vlSpecs[3]);
     </script>
 </body>
 
