@@ -37,64 +37,28 @@ desc: visualizations of data
     </div>
 
     <div>
-        <h2>Average Square Feet by Year</h2>
+        <h2>Average Square Feet by Year (Scatter Plot)</h2>
         <div id="viz4"></div>
     </div>
 
     <script>
-        var vlSpecs = [
-            // Visualization 1: Building Types Count
-            {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "bar",
-                "encoding": {
-                    "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
-                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
-                }
-            },
-            // Visualization 2: Building Size vs. Year Constructed
-            {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "point",
-                "encoding": {
-                    "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                    "y": { "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Gross Square Feet" } }
-                }
-            },
-            // Visualization 3: Building Types Count by Year
-            {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "bar",
-                "encoding": {
-                    "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } },
-                    "color": { "field": "BUILDING TYPE", "type": "nominal", "legend": { "title": "Building Type" } }
-                }
-            },
-            // Visualization 4: Average Square Feet by Year
-            {
-                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
-                "mark": "line",
-                "encoding": {
-                    "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                    "y": { "aggregate": "average", "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Average Square Feet" } },
-                    "color": { "value": "steelblue" }
-                }
+        var vlSpec4Scatter = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+            "mark": "point",
+            "encoding": {
+                "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                "y": { "aggregate": "average", "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Average Square Feet" } },
+                "color": { "value": "steelblue" }
             }
-        ];
+        };
 
-        vegaEmbed("#viz1", vlSpecs[0]);
-        vegaEmbed("#viz2", vlSpecs[1]);
-        vegaEmbed("#viz3", vlSpecs[2]);
-        vegaEmbed("#viz4", vlSpecs[3]);
+        vegaEmbed("#viz4", vlSpec4Scatter);
     </script>
 </body>
 
 </html>
+
 
 
 <!-- <!DOCTYPE html>
