@@ -5,6 +5,98 @@ title = data inventory of buildings
 desc: visualizations of data 
 ---
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Inventory Visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0/build/vega.min.js"
+        integrity="sha256-na2uPt+tUPV7GRVpc+/ezQj+lGwljIvOJifkmg8f3as=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0/build/vega-lite.min.js"
+        integrity="sha256-WLAn82Ut4GptY/IJf4K/1i+R8ibAkVLFhBVkOovqCK8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2/build/vega-embed.min.js"
+        integrity="sha256-GfFZ6w7V/y3Ws9eHVsOXZ/F1ZFroThVZraOAx3HAt6s=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+        <h2>Building Types Count</h2>
+        <div id="viz1"></div>
+    </div>
+
+    <div>
+        <h2>Building Size vs. Year Constructed</h2>
+        <div id="viz2"></div>
+    </div>
+
+    <div>
+        <h2>Building Types Count by Year</h2>
+        <div id="viz3"></div>
+    </div>
+
+    <div>
+        <h2>Average Square Feet by Year</h2>
+        <div id="viz4"></div>
+    </div>
+
+    <script>
+        var vlSpecs = [
+            // Visualization 1: Building Types Count
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "bar",
+                "encoding": {
+                    "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
+                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
+                }
+            },
+            // Visualization 2: Building Size vs. Year Constructed
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "point",
+                "encoding": {
+                    "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                    "y": { "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Gross Square Feet" } }
+                }
+            },
+            // Visualization 3: Building Types Count by Year
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "bar",
+                "encoding": {
+                    "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                    "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } },
+                    "color": { "field": "BUILDING TYPE", "type": "nominal", "legend": { "title": "Building Type" } }
+                }
+            },
+            // Visualization 4: Average Square Feet by Year
+            {
+                "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                "data": { "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv" },
+                "mark": "line",
+                "encoding": {
+                    "x": { "field": "YEAR CONSTRUCTED", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                    "y": { "aggregate": "average", "field": "GROSS SQUARE FEET", "type": "quantitative", "axis": { "title": "Average Square Feet" } },
+                    "color": { "value": "steelblue" }
+                }
+            }
+        ];
+
+        vegaEmbed("#viz1", vlSpecs[0]);
+        vegaEmbed("#viz2", vlSpecs[1]);
+        vegaEmbed("#viz3", vlSpecs[2]);
+        vegaEmbed("#viz4", vlSpecs[3]);
+    </script>
+</body>
+
+</html>
+
+
 <!-- <!DOCTYPE html>
 <html lang="en">
 
