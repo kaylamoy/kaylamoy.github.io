@@ -4,7 +4,6 @@
 title = data inventory of buildings
 desc: visualizations of data 
 ---
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +53,7 @@ desc: visualizations of data
                 "data": {
                     "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
                 },
-                "mark": "bar",
+                "mark": "line", // Change 'line' to 'point' for scatter plot
                 "encoding": {
                     "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
                     "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } },
