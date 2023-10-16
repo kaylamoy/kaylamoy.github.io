@@ -32,7 +32,7 @@ desc: visualizations of data
             },
             "mark": "bar",
             "encoding": {
-                "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
+                "x": { "field": "Congress Dist", "type": "nominal", "axis": { "title": "Building Type" } },
                 "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
             }
         };
@@ -44,7 +44,7 @@ desc: visualizations of data
             },
             "mark": "bar",
             "encoding": {
-                "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                "x": { "field": "Year Constructed", "type": "ordinal", "axis": { "title": "Year Constructed" } },
                 "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
             }
         };
@@ -56,8 +56,8 @@ desc: visualizations of data
             },
             "mark": { "type": "boxplot", "extent": "min-max" },
             "encoding": {
-                "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
-                "y": { "field": "BUILDING SIZE", "type": "quantitative", "axis": { "title": "Building Size" } }
+                "x": { "field": "Year Constructed", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                "y": { "field": "Total Floors", "type": "quantitative", "axis": { "title": "Building Size" } }
             }
         };
 
@@ -69,5 +69,22 @@ desc: visualizations of data
 
 </html>
 
+<!-- 
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"},
+    "mark": {
+      "type": "boxplot", "extent": "min-max" },
+      "encoding": {
+        "x": { 
+          "field": "Year Constructed", 
+          "type": "ordinal", 
+          "axis": { "title": "Year Constructed" } 
+          },
+        "y": { 
+          "field": "Total Floors", 
+          "type": "quantitative", 
+          "axis": { "title": "Building Size" } }}
+  }
 
-
+ -->
