@@ -3,7 +3,85 @@
 ---
 title = data inventory of buildings
 desc: visualizations of data 
----
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Inventory Visualizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0/build/vega.min.js"
+        integrity="sha256-na2uPt+tUPV7GRVpc+/ezQj+lGwljIvOJifkmg8f3as=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0/build/vega-lite.min.js"
+        integrity="sha256-WLAn82Ut4GptY/IJf4K/1i+R8ibAkVLFhBVkOovqCK8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2/build/vega-embed.min.js"
+        integrity="sha256-GfFZ6w7V/y3Ws9eHVsOXZ/F1ZFroThVZraOAx3HAt6s=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="viz1"></div>
+    <div id="viz2"></div>
+    <div id="viz3"></div>
+
+    <script>
+        var vlSpec1 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {
+                "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+            },
+            "mark": "bar",
+            "encoding": {
+                "x": { "field": "BUILDING TYPE", "type": "nominal", "axis": { "title": "Building Type" } },
+                "y": { "aggregate": "count", "type": "quantitative", "axis": { "title": "Count" } }
+            }
+        };
+
+        var vlSpec2 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {
+                "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+            },
+            "mark": "point",
+            "encoding": {
+                "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                "y": { "field": "BUILDING SIZE", "type": "quantitative", "axis": { "title": "Building Size" } }
+            }
+        };
+
+        var vlSpec3 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "data": {
+                "url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"
+            },
+            "mark": {"type": "boxplot", "extent": "min-max"},
+            "encoding": {
+                "x": { "field": "YEAR BUILT", "type": "ordinal", "axis": { "title": "Year Constructed" } },
+                "y": { "field": "BUILDING SIZE", "type": "quantitative", "axis": { "title": "Building Size" } }
+            }
+        };
+
+        vegaEmbed("#viz1", vlSpec1);
+        vegaEmbed("#viz2", vlSpec2);
+        vegaEmbed("#viz3", vlSpec3);
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ---
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,7 +146,7 @@ desc: visualizations of data
     </script>
 </body>
 
-</html>
+</html> -->
 
 
 
@@ -215,42 +293,3 @@ desc: visualizations of data
         vegaEmbed("#viz3", vlSpecs[2]);
     </script>
 </body>
-
-</html> -->
-
-
-<!-- {
-    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-    "hconcat": [
-      {
-        "mark": "bar",
-        "encoding": {
-          "x": {"field": "Year Acquired", "type": "ordinal", "title": "Year Acquired"},
-          "y": {"aggregate": "count", "type": "quantitative", "title": "Building Count"},
-          "color": {"aggregate": "sum", "field": "Square Footage", "type": "quantitative", "scale": {"type": "log"}, "title": "Total Square Footage (Log Scale)"}
-        },
-        "title": "Building Count and Total Square Footage by Year Acquired"
-      },
-      {
-        "mark": "point",
-        "encoding": {
-          "x": {"field": "Year Acquired", "type": "ordinal", "title": "Year Acquired"},
-          "y": {"field": "Square Footage", "type": "quantitative", "title": "Total Square Footage"},
-          "color": {"value": "steelblue"}
-        },
-        "title": "Total Square Footage by Year Acquired"
-      },
-      {
-        "mark": "boxplot",
-        "encoding": {
-          "x": {"field": "Bldg Status", "type": "nominal", "title": "Building Status"},
-          "y": {"field": "Square Footage", "type": "quantitative", "title": "Square Footage"},
-          "color": {"field": "Bldg Status", "type": "nominal", "title": "Building Status"}
-        },
-        "title": "Distribution of Square Footage by Building Status"
-      }
-    ],
-    "resolve": {"scale": {"color": "independent"}},
-    "data": {"url": "https://raw.githubusercontent.com/UIUC-iSchool-DataViz/fall2023-acg-acu/main/data/building_inventory.csv"}
-  }
-   -->
